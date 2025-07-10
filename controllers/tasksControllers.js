@@ -1,8 +1,9 @@
 import tasksModels from "../models/tasksModels.js";
 
 async function getAllTasks(req,res) {
+  const user = req.user
     try{
-        let result = await tasksModels.find({})
+        let result = await tasksModels.find({userId : user._id})
         res.json({tasks:result})
     }
 
@@ -15,8 +16,9 @@ async function getAllTasks(req,res) {
 
 async function createTask(req,res){
     try{
+      const user = req.user
    const newTask = req.body
-  const result =  await tasksModels.create(newTask)
+  const result =  await tasksModels.create({...newTask,userId:user._id});
    res.json({message:"new task created successfully",result})
     }
 
@@ -43,7 +45,7 @@ async function deleteTsk(req, res) {
   try {
     const idTodelete = req.params.id;
     
-    await tasksModels.deleteOne({_id : idToDelete});
+    await tasksModels.deleteOne({ _id: idTodelete });
     res.json({ message: "task has been deleted" });
   } catch (err) {
     console.log(err);
