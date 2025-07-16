@@ -11,13 +11,7 @@ function validateSchema (schema){
         return res.status(400).json({error:error.issues[0].message});
      }
         }
-        if(schema.parse(req.body)){
-            next()
-        }
-        else{
-            res.status(400).json({error:"invalid body"})
-            
-        }
+        
     }
 }
 

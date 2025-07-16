@@ -9,7 +9,7 @@ const tasksRouter = express.Router()
 
 
 tasksRouter.get("/all",checkAuth,getAllTasks);
-tasksRouter.post("/new",checkAuth,validateSchema(taskSchema),createTask);
+tasksRouter.post("/new",checkAuth,createTask);
 tasksRouter.patch("/:id",updateTask);
 tasksRouter.delete("/:id",deleteTsk);
 
